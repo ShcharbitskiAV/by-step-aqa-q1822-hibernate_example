@@ -22,15 +22,14 @@ public class Doctors {
 
     private String surname;
 
-    public Doctors () {}
+    @Column (insertable = false, updatable = false)
+    private int wards_id;
 
-    public Doctors(int id, int phone, int salary, int premium, String name, String surname) {
-        this.id = id;
-        this.phone = phone;
-        this.salary = salary;
-        this.premium = premium;
-        this.name = name;
-        this.surname = surname;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "wards_id", nullable = false)
+    private Wards wards;
+
+    public Doctors() {
     }
 
     public int getId() {
@@ -81,6 +80,22 @@ public class Doctors {
         this.surname = surname;
     }
 
+    public int getWards_id() {
+        return wards_id;
+    }
+
+    public void setWards_id(int wards_id) {
+        this.wards_id = wards_id;
+    }
+
+    public Wards getWards() {
+        return wards;
+    }
+
+    public void setWards(Wards wards) {
+        this.wards = wards;
+    }
+
     @Override
     public String toString() {
         return "Doctors{" +
@@ -90,6 +105,8 @@ public class Doctors {
                 ", premium=" + premium +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", wards_id=" + wards_id +
+                ", wards=" + wards +
                 '}';
     }
 }

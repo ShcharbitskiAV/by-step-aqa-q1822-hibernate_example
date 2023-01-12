@@ -1,6 +1,7 @@
 package by_step_aqa_q1822_hibernate_example.dao;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "wards")
@@ -18,13 +19,25 @@ public class Wards {
 
     private String name;
 
-    public Wards() { }
+    @OneToMany(mappedBy = "wards", fetch = FetchType.EAGER)
+    private Set<Doctors> doctors;
+
+    public Wards() {
+    }
 
     public Wards(int id, int building, int floor, String name) {
         this.id = id;
         this.building = building;
         this.floor = floor;
         this.name = name;
+    }
+
+    public Set<Doctors> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(Set<Doctors> doctors) {
+        this.doctors = doctors;
     }
 
     public int getId() {
